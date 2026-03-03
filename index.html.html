@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeoEssays — Service Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --parchment: #faf6ef;
+    --gold: #c9973a;
+    --gold-light: #e8c97a;
+    --rust: #8b3a2a;
+    --cream: #f2ead8;
+    --muted: #7a6e5f;
+    --border: #d9cdb8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--parchment);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 48px 40px 36px;
+    background: var(--ink);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 30px,
+      rgba(201,151,58,0.04) 30px,
+      rgba(201,151,58,0.04) 60px
+    );
+  }
+
+  .header-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.0;
+    position: relative;
+  }
+
+  .header-title span {
+    color: var(--gold-light);
+  }
+
+  .header-subtitle {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  .header-url {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--gold);
+    opacity: 0.8;
+    position: relative;
+    letter-spacing: 1px;
+  }
+
+  /* Divider ornament */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 40px;
+    background: var(--gold);
+    height: 3px;
+  }
+
+  /* Body */
+  .body {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 40px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-left: 3px solid var(--gold);
+    padding-left: 10px;
+    margin-bottom: 18px;
+  }
+
+  /* Stats row */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat-cell {
+    background: #fff;
+    padding: 22px 18px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--rust);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Main table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  thead tr {
+    background: var(--ink);
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  thead th:first-child { width: 28%; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(201,151,58,0.06); }
+
+  tbody td {
+    padding: 14px 16px;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .td-key {
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 12.5px;
+    letter-spacing: 0.3px;
+  }
+
+  .td-val {
+    color: #3d3328;
+    font-weight: 300;
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    background: var(--ink);
+    color: var(--gold-light);
+    font-size: 10.5px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .tag.light {
+    background: rgba(201,151,58,0.12);
+    color: var(--rust);
+  }
+
+  /* Value props */
+  .props-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .prop-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 16px 18px;
+    border-left: 3px solid var(--gold);
+  }
+
+  .prop-title {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .prop-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  .footer-left {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 480px;
+  }
+
+  .footer-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .divider-line {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .props-grid { grid-template-columns: 1fr; }
+    .body { padding: 24px 20px; }
+    .header { padding: 36px 24px 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Academic Writing Service · Detailed Overview</div>
+    <div class="header-title">Leo<span>Essays</span></div>
+    <div class="header-subtitle">Expert academic help, right when you need it</div>
+    <a href="https://leoessays.com/" target="_blank" class="header-url">leoessays.com →</a>
+  </div>
+  <div class="ornament"></div>
+
+  <div class="body">
+
+    <!-- Key Metrics -->
+    <div class="section">
+      <div class="section-title">Key Metrics</div>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <span class="stat-number">400+</span>
+          <div class="stat-label">Verified Expert Writers</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-number">45+</span>
+          <div class="stat-label">Academic Subjects Covered</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-number">74%</span>
+          <div class="stat-label">Client Return Rate</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-number">100%</span>
+          <div class="stat-label">Human-Written Content</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- General Info Table -->
+    <div class="section">
+      <div class="section-title">General Information</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-key">Website</td>
+            <td class="td-val">leoessays.com</td>
+          </tr>
+          <tr>
+            <td class="td-key">Service Type</td>
+            <td class="td-val">Custom academic writing, editing & proofreading for students</td>
+          </tr>
+          <tr>
+            <td class="td-key">Company</td>
+            <td class="td-val">EndeGenie Tech LTD — registered in Cyprus (Nicosia, A.G. Leventi 5, Floor 13)</td>
+          </tr>
+          <tr>
+            <td class="td-key">Target Audience</td>
+            <td class="td-val">College & university students worldwide facing tight deadlines or heavy workloads</td>
+          </tr>
+          <tr>
+            <td class="td-key">Content Policy</td>
+            <td class="td-val">Papers intended for research & study reference only; plagiarism not endorsed</td>
+          </tr>
+          <tr>
+            <td class="td-key">Copyright Protection</td>
+            <td class="td-val">DMCA Protected</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Services Table -->
+    <div class="section">
+      <div class="section-title">Supported Paper Types</div>
+      <div class="tags">
+        <span class="tag">Essay</span>
+        <span class="tag">Research Paper</span>
+        <span class="tag">Term Paper</span>
+        <span class="tag">Thesis / Dissertation</span>
+        <span class="tag">Coursework</span>
+        <span class="tag">Case Study</span>
+        <span class="tag">Literature Review</span>
+        <span class="tag">Research Proposal</span>
+        <span class="tag">Book Review</span>
+        <span class="tag">Article Review</span>
+        <span class="tag">Movie Review</span>
+        <span class="tag">Business Plan</span>
+        <span class="tag">Report</span>
+        <span class="tag">Admission Essay</span>
+        <span class="tag">Reflective Writing</span>
+        <span class="tag">Creative Writing</span>
+        <span class="tag">Critical Thinking</span>
+        <span class="tag">Annotated Bibliography</span>
+        <span class="tag">Presentation / Speech</span>
+        <span class="tag light">Proofreading & Editing</span>
+      </div>
+    </div>
+
+    <hr class="divider-line">
+
+    <!-- How It Works -->
+    <div class="section">
+      <div class="section-title">How It Works — 5 Steps</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-key">① Place Order</td>
+            <td class="td-val">Submit topic, deadline and instructions via a simple form</td>
+          </tr>
+          <tr>
+            <td class="td-key">② Provide Details</td>
+            <td class="td-val">Upload files, rubrics, examples or professor comments for accuracy</td>
+          </tr>
+          <tr>
+            <td class="td-key">③ Get Matched</td>
+            <td class="td-val">System pairs you with a specialist suited to your subject & assignment type</td>
+          </tr>
+          <tr>
+            <td class="td-key">④ Collaborate</td>
+            <td class="td-val">Chat with the writer, clarify details and track progress in real time</td>
+          </tr>
+          <tr>
+            <td class="td-key">⑤ Receive Paper</td>
+            <td class="td-val">Polished, ready-to-submit paper delivered on schedule</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Value Props -->
+    <div class="section">
+      <div class="section-title">Core Value Propositions</div>
+      <div class="props-grid">
+        <div class="prop-card">
+          <div class="prop-title">Subject-Matter Experts Only</div>
+          <div class="prop-desc">Every paper is handled by a human specialist with genuine knowledge of your field — no AI-generated content, no templates.</div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-title">Written from Scratch</div>
+          <div class="prop-desc">Each order starts fresh; uniqueness is verified before delivery ensuring full originality.</div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-title">Student-Friendly Pricing</div>
+          <div class="prop-desc">Transparent, flat rates — no hidden fees. Fair pricing for real expertise and dependable results.</div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-title">On-Time Delivery</div>
+          <div class="prop-desc">Urgent deadlines are handled daily. Even complex assignments are completed calmly and on schedule.</div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-title">Full Confidentiality</div>
+          <div class="prop-desc">Personal data, files and communication stay strictly private. Advanced encryption protects financial information.</div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-title">Free Revisions</div>
+          <div class="prop-desc">If anything needs adjustment after delivery, the assigned expert refines the paper quickly and professionally.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider-line">
+
+    <!-- Policies & Support -->
+    <div class="section">
+      <div class="section-title">Policies & Support</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Policy / Feature</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-key">Revisions</td>
+            <td class="td-val">Unlimited revisions by the original writer until satisfaction</td>
+          </tr>
+          <tr>
+            <td class="td-key">Refund Policy</td>
+            <td class="td-val">Money-back guarantee available (details on dedicated policy page)</td>
+          </tr>
+          <tr>
+            <td class="td-key">Privacy Policy</td>
+            <td class="td-val">No reselling or sharing of personal data; minimal data storage</td>
+          </tr>
+          <tr>
+            <td class="td-key">Customer Support</td>
+            <td class="td-val">24/7 availability with real-time chat communication</td>
+          </tr>
+          <tr>
+            <td class="td-key">Urgency Handling</td>
+            <td class="td-val">Short-deadline orders accepted and completed professionally</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-left">
+        <strong style="font-weight:500;color:var(--ink);">Legal Notice:</strong> LeoEssays is operated by EndeGenie Tech LTD (Cyprus). All expert notes are strictly for research and study reference purposes. The service does not endorse or condone plagiarism in any form.
+      </div>
+      <div class="footer-badge">
+        leoessays.com<br>© 2026 All Rights Reserved
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
